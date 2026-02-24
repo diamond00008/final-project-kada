@@ -2,15 +2,15 @@
 import React, { useState, useEffect } from 'react';
 import BookCard from './BookCard';
 import CategoryBar from './CategoryBar';
-import { supabase } from '../lib/supabase'; // นำเข้า supabase
+import { supabase } from '../lib/supabase'; 
 
 export default function BookList() {
   const [activeCategory, setActiveCategory] = useState("All Books");
-  const [allBooks, setAllBooks] = useState<any[]>([]); // เก็บหนังสือทั้งหมดจาก DB
+  const [allBooks, setAllBooks] = useState<any[]>([]); 
   const [filteredBooks, setFilteredBooks] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
-  // ดึงข้อมูลจาก Supabase เมื่อโหลด Component
+  
   useEffect(() => {
     const fetchBooks = async () => {
       const { data, error } = await supabase.from('books').select('*');
@@ -23,7 +23,7 @@ export default function BookList() {
     fetchBooks();
   }, []);
 
-  // กรองตามหมวดหมู่
+  
   useEffect(() => {
     if (activeCategory === "All Books") {
       setFilteredBooks(allBooks);

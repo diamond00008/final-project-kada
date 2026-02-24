@@ -1,4 +1,4 @@
-"use client"; // จำเป็นต้องใส่เพราะเราใช้ onClick และ Context
+"use client"; 
 
 import { ShoppingCart } from "lucide-react";
 import { useCart } from "../context/CartContext";

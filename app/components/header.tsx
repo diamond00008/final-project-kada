@@ -1,4 +1,5 @@
 "use client";
+
 import { ShoppingCart, Home as HomeIcon, Info, User } from "lucide-react"; 
 import Link from "next/link"; 
 import { useCart } from "../context/CartContext";
@@ -7,7 +8,6 @@ export default function Header() {
     const { cartCount } = useCart();
 
   return (
-    // 🚨 ปรับขอบกระจกให้สว่างขึ้นนิดนึง (bg-slate-900/80) และปรับขอบล่าง (border-slate-700)
     <div className="sticky top-0 z-50 backdrop-blur-md bg-slate-900/80 flex items-center justify-between py-4 px-6 md:px-12 text-white border-b border-slate-700 shadow-sm">
       
       <Link href="/">
@@ -39,10 +39,14 @@ export default function Header() {
 
       <div className="h-6 w-[1px] bg-slate-600 hidden md:block mx-2"></div>
 
-      <button className="flex items-center gap-2 bg-slate-800 hover:bg-indigo-500 text-white px-6 py-2 rounded-full text-sm font-semibold transition-all duration-300 shadow-md hover:shadow-indigo-500/30 border border-slate-600 hover:border-indigo-400">
+      {/* 🔴 แก้ไขตรงนี้: เปลี่ยนจาก <button> เป็น <Link href="/login"> */}
+      <Link 
+        href="/login" 
+        className="flex items-center gap-2 bg-slate-800 hover:bg-indigo-500 text-white px-6 py-2 rounded-full text-sm font-semibold transition-all duration-300 shadow-md hover:shadow-indigo-500/30 border border-slate-600 hover:border-indigo-400"
+      >
         <User size={18} />
         <span>Login</span>
-      </button>
+      </Link>
       </div>
     </div>
   );

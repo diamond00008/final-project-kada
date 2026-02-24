@@ -1,19 +1,20 @@
 "use client";
-import Link from "next/link";
+
 import { ShoppingCart } from "lucide-react";
 import { useCart } from "../context/CartContext";
 
 export default function BookCard({ book }: any) {
   const { addToCart } = useCart();
   
-  // เช็คว่าสินค้าหมดหรือไม่
+  
   const isOutOfStock = book.stock <= 0;
 
   return (
-    <Link href={`/book/${book.id}`} className={`block group h-full ${isOutOfStock ? 'opacity-80' : ''}`}>
+    
+    <div className={`block group h-full ${isOutOfStock ? 'opacity-80' : ''}`}>
       <div className={`relative flex flex-col h-full bg-slate-800/60 backdrop-blur-md rounded-[2.5rem] border border-white/10 ring-1 ring-white/5 overflow-hidden transition-all duration-500 ${!isOutOfStock && 'group-hover:-translate-y-3 group-hover:shadow-[0_20px_50px_rgba(0,0,0,0.5)] group-hover:border-cyan-500/50'}`}>
         
-        {/* รูปหน้าปก */}
+        
         <div className="relative h-80 overflow-hidden bg-slate-700">
           <img 
             src={book.image} 
@@ -28,7 +29,6 @@ export default function BookCard({ book }: any) {
             </span>
           </div>
 
-          {/* 🔴 ป้ายแจ้งเตือน OUT OF STOCK ทับรูปปก (จะโชว์เมื่อสต็อก <= 0) */}
           {isOutOfStock && (
             <div className="absolute inset-0 bg-black/50 flex items-center justify-center backdrop-blur-[2px]">
               <span className="bg-red-600 text-white font-black px-6 py-2 rounded-xl transform -rotate-12 text-xl tracking-widest shadow-2xl border-2 border-red-800">
@@ -38,7 +38,7 @@ export default function BookCard({ book }: any) {
           )}
         </div>
 
-        {/* ข้อมูลหนังสือ */}
+        
         <div className="p-7 flex flex-col flex-grow bg-white/[0.02]">
           <h3 className={`text-xl font-bold text-white mb-2 leading-tight transition-colors line-clamp-2 ${!isOutOfStock && 'group-hover:text-cyan-400'}`}>
             {book.title}
@@ -48,15 +48,17 @@ export default function BookCard({ book }: any) {
           <div className="mt-auto flex items-center justify-between">
             <div className="flex flex-col">
               <span className="text-[10px] text-slate-500 font-bold uppercase tracking-widest">Price</span>
+             
               <span className={`text-2xl font-black ${isOutOfStock ? 'text-slate-500 line-through' : 'text-white'}`}>
-                ฿{book.price.toFixed(2)}
+                ₭{book.price.toLocaleString()}
               </span>
             </div>
 
-            {/* ปุ่มใส่ตะกร้าแบบ Pop Color (Cyan) */}
+          
             <button 
               onClick={(e) => {
-                e.preventDefault(); // ป้องกันไม่ให้ทะลุ Link เข้าไปหน้า Detail
+                
+                e.preventDefault(); 
                 if (!isOutOfStock) addToCart(book);
               }}
               disabled={isOutOfStock}
@@ -71,6 +73,6 @@ export default function BookCard({ book }: any) {
           </div>
         </div>
       </div>
-    </Link>
+    </div> 
   );
 }

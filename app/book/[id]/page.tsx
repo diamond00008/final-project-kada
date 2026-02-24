@@ -1,18 +1,18 @@
 import Link from "next/link";
 import { ArrowLeft, Star, BookOpen, Globe } from "lucide-react";
-import { supabase } from "../../lib/supabase"; // นำเข้า supabase
-import AddToCartButton from "../../components/AddToCartButton"; // นำเข้าปุ่มที่เพิ่งสร้าง
+import { supabase } from "../../lib/supabase"; 
+import AddToCartButton from "../../components/AddToCartButton"; 
 
-// แปลงเป็น async component เพื่อดึงข้อมูลแบบ Server-Side
+
 export default async function BookDetailPage({ params }: { params: { id: string } }) {
-  // ค้นหาหนังสือจาก Supabase โดยใช้ ID
+  
   const { data: book, error } = await supabase
     .from('books')
     .select('*')
     .eq('id', params.id)
-    .single(); // คืนค่ามาแค่ object เดียว
+    .single(); 
 
-  // ถ้าไม่เจอหนังสือ
+  
   if (!book || error) {
     return (
       <div className="min-h-screen bg-black text-white flex items-center justify-center">
@@ -90,7 +90,6 @@ export default async function BookDetailPage({ params }: { params: { id: string 
               </div>
             </div>
 
-            {/* 🔴 เรียกใช้ Component ปุ่มที่เราสร้างไว้ตรงนี้! */}
             <AddToCartButton book={book} />
 
           </div>

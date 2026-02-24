@@ -9,20 +9,18 @@ const categories = ["All Books", "Fiction", "Business", "Technology", "History",
 
 export default function CategoryBar({ onSelectCategory, activeCategory }: CategoryBarProps) {
   return (
-    // กรอบนอกสุด: ใส่ overflow-x-auto และ no-scrollbar เพื่อให้เลื่อนได้แต่ไม่เห็นแถบ
-    <div className="w-full overflow-x-auto no-scrollbar py-4 mb-6 border-b border-gray-800/50">
+    <div className="w-full mb-10 overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
       
-      {/* กรอบด้านใน: จัดเรียงปุ่มเป็นแนวนอน */}
-      <div className="flex items-center gap-3 w-max px-2">
+      <div className="flex items-center gap-2 sm:gap-3 w-max min-w-full py-4 px-3">
         {categories.map((category) => (
           <button 
             key={category}
             onClick={() => onSelectCategory(category)}
             className={`
-              whitespace-nowrap px-8 py-3 rounded-2xl text-sm font-bold transition-all duration-500 
+              whitespace-nowrap px-4 sm:px-5 py-2 rounded-full text-sm font-semibold transition-all duration-300 
               ${activeCategory === category 
-                ? 'bg-cyan-500/10 text-cyan-400 border border-cyan-500/50 shadow-[0_0_20px_rgba(6,182,212,0.2)]' 
-                : 'bg-slate-800/30 text-slate-500 border border-slate-700/50 hover:border-slate-500 hover:text-slate-300'}
+                ? 'bg-cyan-500/10 text-cyan-400 border border-cyan-500/50 shadow-[0_0_15px_rgba(6,182,212,0.2)] scale-105' 
+                : 'bg-slate-800/30 text-slate-400 border border-slate-700/50 hover:border-slate-500 hover:text-slate-200 hover:bg-slate-800/60 hover:-translate-y-0.5'} 
             `}
           >
             {category}
